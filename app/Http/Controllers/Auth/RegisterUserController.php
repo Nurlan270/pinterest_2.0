@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\RegistrationRequest;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class RegisterUserController extends Controller
 {
-    public function __invoke(RegistrationRequest $request)
+    public function __invoke(RegisterRequest $request)
     {
         $credentials = $request->validated();
 

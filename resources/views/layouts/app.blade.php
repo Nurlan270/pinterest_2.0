@@ -9,9 +9,9 @@
     <link rel="shortcut icon" href="{{ asset('assets/favicon.ico') }}" type="image/x-icon">
     <title>
         @if(Route::is('for_you'))
-            Pinterest
+            Pinterest 2.0
         @else
-            @yield('page.title') | Pinterest
+            @yield('page.title') | Pinterest 2.0
         @endif
     </title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])

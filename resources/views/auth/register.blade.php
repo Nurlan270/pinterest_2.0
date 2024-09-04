@@ -7,8 +7,9 @@
     <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
             <img class="mx-auto h-10 w-auto" src="{{ asset('assets/minimized-logo.png') }}"
-                 alt="Your Company">
-            <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Create new account</h2>
+                 alt="Pinterest">
+            <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Create new
+                account</h2>
         </div>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -31,12 +32,7 @@
                 </div>
 
                 <div>
-                    <div class="flex items-center justify-between">
-                        <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
-                        <div class="text-sm">
-                            <a href="#" class="font-semibold text-red-600 hover:text-red-500">Forgot password?</a>
-                        </div>
-                    </div>
+                    <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
                     <div class="mt-2">
                         <input id="password" name="password" type="password" required
                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
@@ -45,7 +41,8 @@
 
                 <div>
                     <div class="flex items-center justify-between">
-                        <label for="password_confirmation" class="block text-sm font-medium leading-6 text-gray-900">Password confirmation</label>
+                        <label for="password_confirmation" class="block text-sm font-medium leading-6 text-gray-900">Password
+                            confirmation</label>
                     </div>
                     <div class="mt-2">
                         <input id="password_confirmation" name="password_confirmation" type="password" required
@@ -60,6 +57,17 @@
                     </button>
                 </div>
             </form>
+
+            <div class="inline-flex items-center justify-center w-full">
+                <hr class="w-64 h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
+                <span
+                    class="absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900">or</span>
+            </div>
+
+            <p class="text-gray-500 dark:text-gray-400">
+                If you already have an account <a href="{{ route('login') }}"
+                                                  class="border-b-2 border-b-red-400 text-red-600">login to it</a>
+            </p>
         </div>
     </div>
 
