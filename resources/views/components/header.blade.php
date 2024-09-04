@@ -2,7 +2,7 @@
     <nav class="mx-auto flex max-w-7xl items-center justify-between lg:px-8 h-1 py-10 overflow-hidden"
          aria-label="Global">
         <div class="flex lg:flex-1">
-            <a href="#" class="-m-1.5 p-1.5">
+            <a href="/" class="-m-1.5 p-1.5">
                 <img class="h-auto w-52" src="{{ asset('assets/logo.png') }}" alt="Pinterest logo">
             </a>
         </div>
