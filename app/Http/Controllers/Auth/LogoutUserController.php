@@ -17,7 +17,7 @@ class LogoutUserController extends Controller
         session()->invalidate();
         session()->regenerateToken();
 
-        return redirect()->route('for_you')
+        return redirect()->route('home')
             ->with('auth_msg', 'You logged out successfully!');
     }
 }

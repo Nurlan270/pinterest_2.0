@@ -3,16 +3,23 @@
 use App\Http\Controllers\Auth\LoginUserController;
 use App\Http\Controllers\Auth\LogoutUserController;
 use App\Http\Controllers\Auth\RegisterUserController;
+use App\Http\Controllers\Dashboard\ChangePasswordController;
 use Illuminate\Support\Facades\Route;
 
 //      Main page
-Route::view('/', 'for-you')->name('for_you');
+Route::view('/', 'home')->name('home');
 
 //      Auth pages
-Route::view('register', 'auth.register')->name('register');
-Route::view('login', 'auth.login')->name('login');
+Route::view('register', 'auth.register')->middleware('guest')->name('register');
+Route::view('login', 'auth.login')->middleware('guest')->name('login');
 
 //      Auth actions
-Route::post('register', RegisterUserController::class)->name('register_user');
-Route::post('login',LoginUserController::class)->name('login_user');
-Route::get('logout', LogoutUserController::class)->name('logout_user');
+Route::post('register', RegisterUserController::class)->middleware('guest')->name('register_user');
+Route::post('login',LoginUserController::class)->middleware('guest')->name('login_user');
+Route::get('logout', LogoutUserController::class)->middleware('auth')->name('logout_user');
+
+//      Dashboard (Routes related to user)
+Route::view('profile', 'dashboard.profile')->middleware('auth')->name('profile');
+Route::view('settings', 'dashboard.settings')->middleware('auth')->name('settings');
+
+Route::post('change_password', ChangePasswordController::class)->middleware('auth')->name('change_password');

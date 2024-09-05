@@ -1,10 +1,10 @@
 <?php
 
-if (! function_exists('active_if')) {
-    function active_if(string $route): string
+if (! function_exists('bottom_on_if')) {
+    function bottom_on_if(string $route): string
     {
         return \Illuminate\Support\Facades\Route::is($route)
-            ? "bg-red-600 text-white"
-            : "hover:bg-red-500 hover:text-white";
+            ? "text-red-600"
+            : "group-hover:text-red-600";
     }
 }

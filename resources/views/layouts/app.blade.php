@@ -1,5 +1,5 @@
 @use('Illuminate\Support\Facades\Route')
-<!doctype html>
+    <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="{{ asset('assets/favicon.ico') }}" type="image/x-icon">
     <title>
-        @if(Route::is('for_you'))
+        @if(Route::is('home'))
             Pinterest 2.0
         @else
             @yield('page.title') | Pinterest 2.0
@@ -24,7 +24,7 @@
     @yield('content')
 
     @unless(Route::is(['register', 'login']))
-        @include('components.footer')
+        @include('components.bottom-nav')
     @endunless
 </body>
 </html>

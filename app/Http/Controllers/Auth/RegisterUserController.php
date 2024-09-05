@@ -21,7 +21,7 @@ class RegisterUserController extends Controller
 
         auth()->login($user);
 
-        return redirect()->route('for_you')
+        return redirect()->route('home')
             ->with('auth_msg', 'You registered successfully!');
     }
 }

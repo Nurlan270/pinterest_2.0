@@ -21,8 +21,8 @@ class LoginUserController extends Controller
         if (Auth::attempt([
             $loginField => $credentials['email_or_login'],
             'password' => $credentials['password']
-        ])) {
-            return redirect()->route('for_you')
+        ], isset($credentials['remember_me']))) {
+            return redirect()->route('home')
                 ->with('auth_msg', 'You logged in successfully!');
         } else {
             $errors->add('email_or_login', "User with this credentials doesn't exist, or credentials is invalid.");
