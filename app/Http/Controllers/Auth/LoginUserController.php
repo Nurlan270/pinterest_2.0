@@ -26,7 +26,7 @@ class LoginUserController extends Controller
                 ->with('auth_msg', 'You logged in successfully!');
         } else {
             $errors->add('email_or_login', "User with this credentials doesn't exist, or credentials is invalid.");
-            return back()->withErrors($errors);
+            return back()->withErrors($errors)->withInput();
         }
     }
 }

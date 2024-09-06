@@ -21,4 +21,13 @@ class RegisterRequest extends FormRequest
             'password' => ['required', 'confirmed', Password::min(6)],
         ];
     }
+
+    public function messages()
+    {
+        return [
+          'name' => [
+              'unique' => 'The login has already been taken'
+          ]
+        ];
+    }
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginUserController;
 use App\Http\Controllers\Auth\LogoutUserController;
 use App\Http\Controllers\Auth\RegisterUserController;
 use App\Http\Controllers\Dashboard\ChangePasswordController;
+use App\Http\Controllers\Dashboard\DeleteAccountController;
 use Illuminate\Support\Facades\Route;
 
 //      Main page
@@ -23,3 +24,4 @@ Route::view('profile', 'dashboard.profile')->middleware('auth')->name('profile')
 Route::view('settings', 'dashboard.settings')->middleware('auth')->name('settings');
 
 Route::post('change_password', ChangePasswordController::class)->middleware('auth')->name('change_password');
+Route::post('delete_account', DeleteAccountController::class)->middleware('auth')->name('delete_account');
