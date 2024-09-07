@@ -26,5 +26,7 @@
     @unless(Route::is(['register', 'login']))
         @include('components.bottom-nav')
     @endunless
+
+    @stack('script')
 </body>
 </html>

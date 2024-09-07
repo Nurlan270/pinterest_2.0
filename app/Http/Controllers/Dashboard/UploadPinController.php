@@ -13,6 +13,7 @@ class UploadPinController extends Controller
     public function __invoke(UploadPinRequest $request)
     {
         $data = $request->validated();
+
         $image = $request->file('image');
         $imgName = time().'_'.$image->hashName();
 

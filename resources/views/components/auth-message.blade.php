@@ -1,6 +1,6 @@
 @if($msg = session('auth_msg'))
     <div id="toast-success"
-         class="fixed flex items-center w-auto p-4 space-x-4 text-gray-500 bg-white rtl:divide-x-reverse rounded-lg shadow top-20 right-5"
+         class="fixed flex items-center z-50 w-auto p-4 space-x-4 text-gray-500 bg-white rtl:divide-x-reverse rounded-lg shadow top-20 right-5"
          role="alert">
         <div
             class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">

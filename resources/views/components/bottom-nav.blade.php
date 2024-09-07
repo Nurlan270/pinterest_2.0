@@ -46,7 +46,10 @@
                         <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
                               clip-rule="evenodd"></path>
                     </svg>
-                @endguest
+                @else
+                    <img class="w-full h-full p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
+                         src="{{ Storage::url('avatars/'.auth()->user()->avatar) }}" alt="Your avatar">
+                @endif
             </div>
             <span class="sr-only">Profile</span>
         </a>

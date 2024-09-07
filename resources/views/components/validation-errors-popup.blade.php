@@ -1,6 +1,6 @@
 @if($errors->any())
     <div id="errors-alert"
-         class="fixed top-4 right-4 max-w-xs p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 shadow-lg"
+         class="fixed top-4 right-4 max-w-xs p-4 mb-4 z-50 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 shadow-lg"
          role="alert">
         <div class="flex items-start pe-10">
             <svg class="flex-shrink-0 w-4 h-4 mt-[2px] mr-2" aria-hidden="true"

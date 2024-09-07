@@ -16,7 +16,7 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'unique:users', 'min:3', 'max:10'],
+            'name' => ['required', 'string', 'unique:users', 'min:3', 'max:15'],
             'email' => ['required', 'email', 'unique:users'],
             'password' => ['required', 'confirmed', Password::min(6)],
         ];
@@ -26,7 +26,9 @@ class RegisterRequest extends FormRequest
     {
         return [
           'name' => [
-              'unique' => 'The login has already been taken'
+              'unique' => 'The login has already been taken',
+              'max' => 'The login must not be greater than 15 characters.',
+              'min' => 'The login must be at least 3 characters.',
           ]
         ];
     }
