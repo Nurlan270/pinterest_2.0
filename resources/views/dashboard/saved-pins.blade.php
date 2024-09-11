@@ -1,7 +1,6 @@
-@use('\Illuminate\Support\Facades\Storage')
 @extends('layouts.app')
 
-@section('page.title', 'My pins')
+@section('page.title', 'Saved pins')
 
 @section('content')
 
@@ -10,9 +9,9 @@
     <x-notification-message/>
 
     <div class="container mx-auto px-5 py-2 lg:px-14 lg:pt-5">
-        @if($pins->isNotEmpty())
+        @if($saved_pins->isNotEmpty())
             <div class="columns-2 md:columns-3 lg:columns-4 xl:columns-6 gap-4">
-                @foreach($pins as $pin)
+                @foreach($saved_pins as $pin)
                     <div class="mb-4 relative group">
                         <a href="{{ route('pin', ['pin' => $pin]) }}">
                             <img

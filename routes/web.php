@@ -6,12 +6,14 @@ use App\Http\Controllers\Auth\RegisterUserController;
 use App\Http\Controllers\Dashboard\ChangePasswordController;
 use App\Http\Controllers\Dashboard\DeleteAccountController;
 use App\Http\Controllers\Dashboard\MyPinsController;
+use App\Http\Controllers\Dashboard\SavesController;
 use App\Http\Controllers\Dashboard\UploadAvatarController;
 use App\Http\Controllers\Dashboard\UploadPinController;
-use App\Http\Controllers\Home\DownloadPinController;
-use App\Http\Controllers\Home\HomePinsController;
+use App\Http\Controllers\Main\DownloadPinController;
+use App\Http\Controllers\Main\HomePinsController;
+use App\Http\Controllers\Main\PinController;
+use App\Http\Controllers\Main\SavePinController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
 
 //      Main page
 Route::get('/', HomePinsController::class)->name('home');
@@ -45,6 +47,13 @@ Route::middleware('auth')->group(function () {
     Route::post('upload-avatar', UploadAvatarController::class)->name('upload_avatar');
 
     Route::get('my-pins', MyPinsController::class)->name('my_pins');
-    Route::get('pins/{pin}/download',DownloadPinController::class)->name('download_pin');
+
+    Route::post('pins/{pin}/save-pin', [SavePinController::class, 'save'])->name('save_pin');
+    Route::post('pins/{pin}/unsave-pin', [SavePinController::class, 'unsave'])->name('unsave_pin');
+
+    Route::get('/saved-pins', SavesController::class)->name('saves');
 
 });
+
+Route::get('pins/{pin}/download',DownloadPinController::class)->name('download_pin');
+Route::get('pins/{pin}', PinController::class)->name('pin');

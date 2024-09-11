@@ -21,7 +21,7 @@ class LoginUserController extends Controller
         if (Auth::attempt([
             $loginField => $credentials['email_or_login'],
             'password' => $credentials['password']
-        ], isset($credentials['remember_me']))) {
+        ], !empty('remember_me') ? 'true' : 'false')) {
             return redirect()->route('home')
                 ->with('auth_msg', 'You logged in successfully!');
         } else {
