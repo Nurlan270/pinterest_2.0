@@ -11,7 +11,7 @@ class SavesController extends Controller
 {
     public function __invoke()
     {
-        $saved_pins = auth()->user()->pins()->with('user')->get();
+        $saved_pins = auth()->user()->saved_pins()->with('user')->get();
 
         return view('dashboard.saved-pins', compact('saved_pins'));
     }

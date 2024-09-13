@@ -50,11 +50,17 @@
             </div>
             <div class="flex items-center justify-between mb-9">
                 <div class="flex items-center gap-4">
-                    <img class="w-14 h-14 rounded-full"
-                         src="{{ !empty($pin->author->avatar) ? Storage::url('avatars/'.$pin->author->avatar) : asset('assets/default-avatar.png') }}"
-                         alt="Profile picture">
+                    <a href="{{ route('user', $pin->user_id) }}">
+                        <img class="w-14 h-14 rounded-full"
+                             src="{{ !empty($pin->author->avatar) ? Storage::url('avatars/'.$pin->author->avatar) : asset('assets/default-avatar.png') }}"
+                             alt="Profile picture">
+                    </a>
                     <div class="font-medium dark:text-white">
-                        <div>{{ $pin->author->name }}</div>
+                        <div>
+                            <a href="{{ route('user', $pin->user_id) }}" class="no-underline hover:underline">
+                                {{ $pin->author->name }}
+                            </a>
+                        </div>
                         <div class="text-sm text-gray-500 dark:text-gray-400">
                             {{ $pin->author->subscribers()->count() }}
                             Subscribers
@@ -105,7 +111,7 @@
                     btn.textContent = 'Saving...';
 
                     let xhr = new XMLHttpRequest();
-                    xhr.open('POST', `/pins/${pinId}/save-pin`, true);
+                    xhr.open('POST', `/pins/${pinId}/save`, true);
                     xhr.setRequestHeader('Content-Type', 'application/json');
                     xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
                     xhr.send();
@@ -144,7 +150,7 @@
                     btn.textContent = 'Unsaving...';
 
                     let xhr = new XMLHttpRequest();
-                    xhr.open('POST', `/pins/${pinId}/unsave-pin`, true);
+                    xhr.open('POST', `/pins/${pinId}/unsave`, true);
                     xhr.setRequestHeader('Content-Type', 'application/json');
                     xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
                     xhr.send();

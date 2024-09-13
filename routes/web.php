@@ -14,6 +14,7 @@ use App\Http\Controllers\Main\HomePinsController;
 use App\Http\Controllers\Main\PinController;
 use App\Http\Controllers\Main\SavePinController;
 use App\Http\Controllers\Main\SubscribeController;
+use App\Http\Controllers\Main\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
 //      Main page
@@ -61,3 +62,5 @@ Route::middleware('auth')->group(function () {
 
 Route::get('pins/{pin}/download',DownloadPinController::class)->name('download_pin');
 Route::get('pins/{pin}', PinController::class)->name('pin');
+
+Route::get('users/{user}', UserProfileController::class)->name('user');

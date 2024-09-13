@@ -10,11 +10,11 @@ class SavePinController extends Controller
 {
     public function save(Pin $pin): void
     {
-        auth()->user()->pins()->attach($pin);
+        auth()->user()->saved_pins()->attach($pin);
     }
 
     public function unsave(Pin $pin): void
     {
-        auth()->user()->pins()->detach($pin);
+        auth()->user()->saved_pins()->detach($pin);
     }
 }

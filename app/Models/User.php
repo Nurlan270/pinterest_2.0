@@ -46,7 +46,7 @@ class User extends Authenticatable
         ];
     }
 
-    public function pins(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function saved_pins(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Pin::class, 'saves');
     }
