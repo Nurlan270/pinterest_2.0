@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Pin::class, 'saves');
     }
+
+    public function subscribers(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'subscribers', 'author_id', 'subscriber_id');
+    }
 }

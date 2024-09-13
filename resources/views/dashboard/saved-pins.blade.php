@@ -35,12 +35,7 @@
             </div>
         @else
             <div class="flex flex-col items-center">
-                <p>You don't have any pin.</p>
-                <p class="mt-5">
-                    <a class="bg-red-600 text-white px-3 py-2 me-1 rounded-3xl font-extrabold cursor-pointer hover:bg-red-700"
-                       href="{{ route('create_pin') }}">Click</a>
-                    to create!
-                </p>
+                <p>You don't have any saved pin.</p>
             </div>
         @endif
     </div>

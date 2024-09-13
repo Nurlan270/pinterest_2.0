@@ -13,6 +13,7 @@ use App\Http\Controllers\Main\DownloadPinController;
 use App\Http\Controllers\Main\HomePinsController;
 use App\Http\Controllers\Main\PinController;
 use App\Http\Controllers\Main\SavePinController;
+use App\Http\Controllers\Main\SubscribeController;
 use Illuminate\Support\Facades\Route;
 
 //      Main page
@@ -38,20 +39,23 @@ Route::middleware('auth')->group(function () {
     //      Views
     Route::view('profile', 'dashboard.profile')->name('profile');
     Route::view('settings', 'dashboard.settings')->name('settings');
-    Route::view('create-new-pin', 'dashboard.create-pin')->name('create_pin');
+    Route::view('pins/create', 'dashboard.create-pin')->name('create_pin');
 
-    Route::post('change_password', ChangePasswordController::class)->name('change_password');
-    Route::post('delete_account', DeleteAccountController::class)->name('delete_account');
+    Route::post('change/password', ChangePasswordController::class)->name('change_password');
+    Route::post('delete/account', DeleteAccountController::class)->name('delete_account');
 
-    Route::post('upload-pin', UploadPinController::class)->name('upload_pin');
-    Route::post('upload-avatar', UploadAvatarController::class)->name('upload_avatar');
+    Route::post('pins/upload', UploadPinController::class)->name('upload_pin');
+    Route::post('avatars/upload', UploadAvatarController::class)->name('upload_avatar');
 
-    Route::get('my-pins', MyPinsController::class)->name('my_pins');
+    Route::get('pins/mine', MyPinsController::class)->name('my_pins');
 
-    Route::post('pins/{pin}/save-pin', [SavePinController::class, 'save'])->name('save_pin');
-    Route::post('pins/{pin}/unsave-pin', [SavePinController::class, 'unsave'])->name('unsave_pin');
+    Route::post('pins/{pin}/save', [SavePinController::class, 'save'])->name('save_pin');
+    Route::post('pins/{pin}/unsave', [SavePinController::class, 'unsave'])->name('unsave_pin');
 
-    Route::get('/saved-pins', SavesController::class)->name('saves');
+    Route::get('pins/saved', SavesController::class)->name('saves');
+
+    Route::post('author/{author}/{pin}/subscribe', [SubscribeController::class, 'subscribe'])->name('subscribe');
+    Route::post('author/{author}/{pin}/unsubscribe', [SubscribeController::class, 'unsubscribe'])->name('unsubscribe');
 
 });
 

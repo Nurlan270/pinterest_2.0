@@ -42,7 +42,7 @@
             </div>
             <div class="mt-2 mb-4 text-sm">
                 Warning: Deleting your account is a permanent action and cannot be undone. All your data, including
-                posts, comments, and personal information, will be permanently removed from our system. This process is
+                pins, subscribers, and personal information, will be permanently removed from our system. This process is
                 irreversible, and once completed, you will no longer be able to recover your account or any associated
                 data.
             </div>

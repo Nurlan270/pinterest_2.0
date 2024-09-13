@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Main;
 use App\Http\Controllers\Controller;
 use App\Models\Pin;
 use App\Models\Saves;
+use App\Models\Subscribers;
 use Illuminate\Http\Request;
 
 class PinController extends Controller
@@ -16,6 +17,11 @@ class PinController extends Controller
             ->where('pin_id', $pin->id)
             ->exists();
 
-        return view('main.pin', compact('pin', 'is_saved'));
+        $is_subscribed = Subscribers::query()
+            ->where('subscriber_id', auth()->id())
+            ->where('author_id', $pin->user_id)
+            ->exists();
+
+        return view('main.pin', compact('pin', 'is_saved', 'is_subscribed'));
     }
 }

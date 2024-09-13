@@ -9,31 +9,44 @@
             <img src="{{ Storage::url('pins/'.$pin->image) }}" alt="Pin image" class="rounded-3xl">
         </div>
         <div class="flex flex-col">
-            <div class="flex items-center justify-end mb-7 gap-2 w-full h-min">
-                <a href="{{ route('download_pin', ['pin' => $pin->image, 'name' => $pin->title]) }}"
-                   title="Download pin"
-                   class="bg-white text-gray-800 px-3 py-3 border-[1px] rounded-3xl font-extrabold cursor-pointer hover:bg-gray-100">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                         stroke="currentColor" class="size-5">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                              d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"/>
-                    </svg>
-                </a>
-                @if($is_saved)
-                    <button type="button" id="unsave-btn"
-                            data-pin-id="{{ $pin->id }}"
-                            data-csrf="{{ csrf_token() }}"
-                            class="bg-black text-white px-5 py-3 rounded-3xl font-extrabold cursor-pointer">
-                        Saved
-                    </button>
-                @else
-                    <button type="button" id="save-btn"
-                            data-pin-id="{{ $pin->id }}"
-                            data-csrf="{{ csrf_token() }}"
-                            class="bg-red-600 text-white px-5 py-3 rounded-3xl font-extrabold cursor-pointer hover:bg-red-700">
-                        Save
-                    </button>
-                @endif
+            <div class="flex items-center justify-between mb-7 gap-2 w-full h-min">
+                <div>
+                    @can('delete', $pin)
+                        <a class="px-3 py-2 border-2 border-red-600 rounded-3xl font-semibold hover:bg-red-600 hover:text-white cursor-pointer transition-colors">
+                            Delete pin
+                        </a>
+                    @endcan
+                </div>
+                <div class="flex gap-3">
+                    <a href="{{ route('download_pin', ['pin' => $pin->image, 'name' => $pin->title]) }}"
+                       title="Download pin"
+                       class="bg-white text-gray-800 px-3 py-3 border-[1px] rounded-3xl font-extrabold cursor-pointer hover:bg-gray-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                             stroke="currentColor" class="size-5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"/>
+                        </svg>
+                    </a>
+                    @auth
+                        @can('save', $pin)
+                            @if($is_saved)
+                                <button type="button" id="unsave-btn"
+                                        data-pin-id="{{ $pin->id }}"
+                                        data-csrf="{{ csrf_token() }}"
+                                        class="bg-black text-white px-5 py-3 rounded-3xl font-extrabold cursor-pointer">
+                                    Saved
+                                </button>
+                            @else
+                                <button type="button" id="save-btn"
+                                        data-pin-id="{{ $pin->id }}"
+                                        data-csrf="{{ csrf_token() }}"
+                                        class="bg-red-600 text-white px-5 py-3 rounded-3xl font-extrabold cursor-pointer hover:bg-red-700">
+                                    Save
+                                </button>
+                            @endif
+                        @endcan
+                    @endauth
+                </div>
             </div>
             <div class="flex items-center justify-between mb-9">
                 <div class="flex items-center gap-4">
@@ -42,14 +55,33 @@
                          alt="Profile picture">
                     <div class="font-medium dark:text-white">
                         <div>{{ $pin->author->name }}</div>
-                        <div class="text-sm text-gray-500 dark:text-gray-400">{{ $pin->author->subscribers }}
+                        <div class="text-sm text-gray-500 dark:text-gray-400">
+                            {{ $pin->author->subscribers()->count() }}
                             Subscribers
                         </div>
                     </div>
                 </div>
-                <button class="border-[1px] border-gray-300 rounded-3xl hover:bg-gray-100 font-semibold px-4 py-2">
-                    Subscribe
-                </button>
+                @auth
+                    @can('subscribe', $pin)
+                        @if($is_subscribed)
+                            <button type="button" id="unsubscribe-btn"
+                                    data-author-id="{{ $pin->user_id }}"
+                                    data-pin-id="{{ $pin->id }}"
+                                    data-csrf="{{ csrf_token() }}"
+                                    class="bg-black text-white rounded-3xl font-semibold px-4 py-2">
+                                Unsubscribe
+                            </button>
+                        @else
+                            <button type="button" id="subscribe-btn"
+                                    data-author-id="{{ $pin->user_id }}"
+                                    data-pin-id="{{ $pin->id }}"
+                                    data-csrf="{{ csrf_token() }}"
+                                    class="border-[1px] border-gray-300 rounded-3xl hover:bg-gray-100 font-semibold px-4 py-2">
+                                Subscribe
+                            </button>
+                        @endif
+                    @endcan
+                @endauth
             </div>
             <div class="flex flex-col">
                 <h4 class="text-lg mb-3">{{ $pin->title }}</h4>
@@ -61,6 +93,8 @@
     @pushonce('script')
         <script>
             document.addEventListener('DOMContentLoaded', function () {
+                const saveBtn = document.getElementById('save-btn');
+                const unsaveBtn = document.getElementById('unsave-btn');
                 let isRequestInProgress = false;
 
                 function handleSave(btn, pinId, csrfToken) {
@@ -141,8 +175,69 @@
                     };
                 }
 
-                const saveBtn = document.getElementById('save-btn');
-                const unsaveBtn = document.getElementById('unsave-btn');
+                function handleSubscription(button, url, newId, newText, loadingText, addClasses, removeClasses) {
+                    const authorId = button.getAttribute('data-author-id');
+                    const csrfToken = button.getAttribute('data-csrf');
+
+                    button.disabled = true;
+                    const originalText = button.innerHTML;
+                    button.innerHTML = loadingText;
+
+                    fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': csrfToken
+                        },
+                        body: JSON.stringify({author_id: authorId})
+                    })
+                        .then(response => {
+                            const contentType = response.headers.get('content-type');
+                            if (contentType && contentType.includes('application/json')) {
+                                return response.json();
+                            } else {
+                                return response.text();
+                            }
+                        })
+                        .then(data => {
+                            button.id = newId;
+                            button.innerHTML = newText;
+                            button.classList.remove(...removeClasses);
+                            button.classList.add(...addClasses);
+                        })
+                        .catch(error => {
+                            button.innerHTML = "Error";
+                        })
+                        .finally(() => {
+                            button.disabled = false;
+                        });
+                }
+
+                document.addEventListener('click', function (event) {
+                    const button = event.target;
+
+                    if (button.id === 'subscribe-btn') {
+                        handleSubscription(
+                            button,
+                            `/author/${button.getAttribute('data-author-id')}/${button.getAttribute('data-pin-id')}/subscribe`,
+                            'unsubscribe-btn',
+                            'Unsubscribe',
+                            'Subscribing...',
+                            ['bg-black', 'text-white'],
+                            ['border-[1px]', 'border-gray-300', 'hover:bg-gray-100']
+                        );
+                    } else if (button.id === 'unsubscribe-btn') {
+                        handleSubscription(
+                            button,
+                            `/author/${button.getAttribute('data-author-id')}/${button.getAttribute('data-pin-id')}/unsubscribe`,
+                            'subscribe-btn',
+                            'Subscribe',
+                            'Unsubscribing...',
+                            ['border-[1px]', 'border-gray-300', 'hover:bg-gray-100'],
+                            ['bg-black', 'text-white']
+                        );
+                    }
+                });
 
                 if (saveBtn) {
                     saveBtn.onclick = function () {
