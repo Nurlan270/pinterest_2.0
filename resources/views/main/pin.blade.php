@@ -13,7 +13,7 @@
                 <div class="flex">
                     <a href="{{ route('download_pin', ['pin' => $pin->image, 'name' => $pin->title]) }}"
                        title="Download pin"
-                       class="bg-white text-gray-800 px-3 py-3 border-[1px] rounded-3xl font-extrabold cursor-pointer hover:bg-gray-100 me-3">
+                       class="bg-white text-gray-800 px-3 py-3 border-[1px] rounded-3xl font-extrabold cursor-pointer hover:bg-gray-100">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                              stroke="currentColor" class="size-5">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -26,20 +26,20 @@
                                 <button type="button" id="unsave-btn"
                                         data-pin-id="{{ $pin->id }}"
                                         data-csrf="{{ csrf_token() }}"
-                                        class="bg-black text-white px-5 py-3 rounded-3xl font-extrabold cursor-pointer">
+                                        class="bg-black text-white px-5 py-3 rounded-3xl font-extrabold cursor-pointer ms-3">
                                     Saved
                                 </button>
                             @else
                                 <button type="button" id="save-btn"
                                         data-pin-id="{{ $pin->id }}"
                                         data-csrf="{{ csrf_token() }}"
-                                        class="bg-red-600 text-white px-5 py-3 rounded-3xl font-extrabold cursor-pointer hover:bg-red-700">
+                                        class="bg-red-600 text-white px-5 py-3 rounded-3xl font-extrabold cursor-pointer hover:bg-red-700 ms-3">
                                     Save
                                 </button>
                             @endif
                         @elsecan('delete', $pin)
                             <button type="button" data-modal-target="popup-modal" data-modal-toggle="popup-modal"
-                                    class="bg-red-600 text-white px-5 py-3 rounded-3xl font-extrabold cursor-pointer hover:bg-red-700">
+                                    class="bg-red-600 text-white px-5 py-3 rounded-3xl font-extrabold cursor-pointer hover:bg-red-700 ms-3">
                                 Delete pin
                             </button>
 

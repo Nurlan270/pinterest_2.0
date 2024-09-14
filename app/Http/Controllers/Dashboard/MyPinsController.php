@@ -11,7 +11,10 @@ class MyPinsController extends Controller
 {
     public function __invoke()
     {
-        $pins = Pin::query()->where('user_id', auth()->id())->latest()->get(['id', 'title', 'description', 'image']);
+        $pins = Pin::query()
+            ->where('user_id', auth()->id())
+            ->latest()
+            ->get(['id', 'title', 'description', 'image']);
 
         return view('dashboard.my-pins', compact('pins'));
     }
