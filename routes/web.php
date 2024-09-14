@@ -9,6 +9,7 @@ use App\Http\Controllers\Dashboard\MyPinsController;
 use App\Http\Controllers\Dashboard\SavesController;
 use App\Http\Controllers\Dashboard\UploadAvatarController;
 use App\Http\Controllers\Dashboard\UploadPinController;
+use App\Http\Controllers\Main\DeletePinController;
 use App\Http\Controllers\Main\DownloadPinController;
 use App\Http\Controllers\Main\HomePinsController;
 use App\Http\Controllers\Main\PinController;
@@ -57,6 +58,11 @@ Route::middleware('auth')->group(function () {
 
     Route::post('author/{author}/{pin}/subscribe', [SubscribeController::class, 'subscribe'])->name('subscribe');
     Route::post('author/{author}/{pin}/unsubscribe', [SubscribeController::class, 'unsubscribe'])->name('unsubscribe');
+
+    Route::post('author/{author}/subscribe', [SubscribeController::class, 'subscribeAuthor'])->name('subscribe_author');
+    Route::post('author/{author}/unsubscribe', [SubscribeController::class, 'unsubscribeAuthor'])->name('unsubscribe_author');
+
+    Route::delete('pins/{pin}', DeletePinController::class)->name('delete_pin');
 
 });
 

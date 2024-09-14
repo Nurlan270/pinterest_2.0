@@ -22,4 +22,16 @@ class SubscribeController extends Controller
         Gate::authorize('unsubscribe', $pin);
         $author->subscribers()->detach(auth()->id());
     }
+
+    public function subscribeAuthor(User $author): void
+    {
+        Gate::authorize('subscribe', $author);
+        $author->subscribers()->attach(auth()->id());
+    }
+
+    public function unsubscribeAuthor(User $author): void
+    {
+        Gate::authorize('unsubscribe', $author);
+        $author->subscribers()->detach(auth()->id());
+    }
 }

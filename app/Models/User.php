@@ -55,4 +55,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(User::class, 'subscribers', 'author_id', 'subscriber_id');
     }
+
+    public function pins(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Pin::class);
+    }
 }
