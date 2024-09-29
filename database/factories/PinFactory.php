@@ -18,7 +18,7 @@ class PinFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => 3,
+            'user_id' => random_int(7, 15),
             'title' => fake()->realText(20),
             'description' => fake()->realTextBetween(50, 100),
             'image' => Arr::random([

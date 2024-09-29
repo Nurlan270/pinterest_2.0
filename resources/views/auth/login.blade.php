@@ -5,6 +5,7 @@
 @section('content')
 
     <x-validation-errors-popup text="An error occurred:" />
+    <x-notification-message />
 
     <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -31,7 +32,7 @@
                     <div class="flex items-center justify-between">
                         <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
                         <div class="text-sm">
-                            <a href="#" class="font-semibold text-red-600 hover:text-red-500">Forgot password?</a>
+                            <a href="{{ route('password.request') }}" class="font-semibold text-red-600 hover:text-red-500">Forgot password?</a>
                         </div>
                     </div>
                     <div class="mt-2">

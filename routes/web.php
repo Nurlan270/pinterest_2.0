@@ -3,6 +3,8 @@
 use App\Http\Controllers\Auth\LoginUserController;
 use App\Http\Controllers\Auth\LogoutUserController;
 use App\Http\Controllers\Auth\RegisterUserController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\SendResetLinkController;
 use App\Http\Controllers\Dashboard\ChangePasswordController;
 use App\Http\Controllers\Dashboard\DeleteAccountController;
 use App\Http\Controllers\Dashboard\MyPinsController;
@@ -25,12 +27,19 @@ Route::get('/', HomePinsController::class)->name('home');
 //      Auth pages
 Route::view('register', 'auth.register')->middleware('guest')->name('register');
 Route::view('login', 'auth.login')->middleware('guest')->name('login');
+Route::view('forgot-password', 'auth.forgot-password')->middleware('guest')->name('password.request');
+
+Route::get('reset-password', function () {
+    return view('auth.reset-password', ['token' => request('token')]);
+})->middleware('guest')->name('password.reset');
 
 
 
 //      Auth actions
 Route::post('register', RegisterUserController::class)->middleware('guest')->name('register_user');
 Route::post('login', LoginUserController::class)->middleware('guest')->name('login_user');
+Route::post('forgot-password', SendResetLinkController::class)->middleware('guest')->name('password.email');
+Route::post('reset-password', ResetPasswordController::class)->middleware('guest')->name('password.update');
 Route::get('logout', LogoutUserController::class)->middleware('auth')->name('logout_user');
 
 
@@ -70,3 +79,5 @@ Route::get('pins/{pin}/download',DownloadPinController::class)->name('download_p
 Route::get('pins/{pin}', PinController::class)->name('pin');
 
 Route::get('users/{user}', UserProfileController::class)->name('user');
+
+Route::view('/mail', 'mail.reset-password');

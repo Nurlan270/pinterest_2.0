@@ -3,13 +3,17 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Notifications\SendResetLinkNotification;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
+use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements CanResetPassword, FilamentUser
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, \Illuminate\Auth\Passwords\CanResetPassword;
 
     /**
      * The attributes that are mass assignable.
@@ -59,5 +63,18 @@ class User extends Authenticatable
     public function pins(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Pin::class);
+    }
+
+    public function sendPasswordResetNotification($token): void
+    {
+        $url = url('/reset-password?token='.$token);
+
+        $this->notify(new SendResetLinkNotification($url));
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        $trustedEmails = ['nick@mail.ru', 'alex@mail.com'];
+        return in_array($this->email, $trustedEmails);
     }
 }

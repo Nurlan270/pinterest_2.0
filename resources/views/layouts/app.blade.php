@@ -17,13 +17,13 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
-    @unless(Route::is(['register', 'login']))
+    @unless(Route::is(['register', 'login', 'password.request', 'password.reset']))
         @include('components.header')
     @endunless
 
     @yield('content')
 
-    @unless(Route::is(['register', 'login']))
+    @unless(Route::is(['register', 'login', 'password.request', 'password.reset']))
         @include('components.bottom-nav')
     @endunless
 
