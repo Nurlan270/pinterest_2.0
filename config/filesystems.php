@@ -47,7 +47,7 @@ return [
         'pins' => [
             'driver'     => 'local',
             'root'       => storage_path('app/public/pins'),
-            'url'        => env('APP_URL') . '/pins',
+            'url'        => env('APP_URL') . '/storage/pins',
             'visibility' => 'public',
             'throw'      => false,
         ],
@@ -55,7 +55,7 @@ return [
         'avatars' => [
             'driver'     => 'local',
             'root'       => storage_path('app/public/avatars'),
-            'url'        => env('APP_URL') . '/avatars',
+            'url'        => env('APP_URL') . '/storage/avatars',
             'visibility' => 'public',
             'throw'      => false,
         ],
