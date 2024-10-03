@@ -37,7 +37,7 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('password')
                     ->required()
                     ->password()
-                    ->minLength(6)
+                    ->minLength(6),
             ])->columns(1);
     }
 
@@ -50,11 +50,14 @@ class UserResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('subscribers')
+                    ->formatStateUsing(fn ($record) => $record->subscribers->count())
+                    ->default(0),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Joined')
                     ->dateTime('M d, Y - H:i:s')
                     ->sortable(),
-            ]) // Sep 13, 2024 14:06:01
+            ])
             ->filters([
                 //
             ])
