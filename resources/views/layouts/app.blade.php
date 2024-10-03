@@ -1,5 +1,5 @@
 @use('Illuminate\Support\Facades\Route')
-    <!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,9 +9,9 @@
     <link rel="shortcut icon" href="{{ asset('assets/favicon.ico') }}" type="image/x-icon">
     <title>
         @if(Route::is('home'))
-            Pinterest 2.0
+            {{ config('app.name') }}
         @else
-            @yield('page.title') | Pinterest 2.0
+            @yield('page.title') | {{ config('app.name') }}
         @endif
     </title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
