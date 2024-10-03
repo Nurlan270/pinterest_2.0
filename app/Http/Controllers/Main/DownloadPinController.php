@@ -11,6 +11,6 @@ class DownloadPinController extends Controller
 {
     public function __invoke($pin): \Symfony\Component\HttpFoundation\StreamedResponse
     {
-        return Storage::download('pins/'.$pin, \request()->input('name'));
+        return Storage::download('storage/pins/'.$pin, \request()->input('name'));
     }
 }
