@@ -4,9 +4,36 @@
 
 @section('content')
 
-    <x-top-nav />
+    <x-top-nav/>
 
-    <div class="flex flex-col mx-auto max-w-2xl mt-6 mb-24">
+    <div class="flex flex-col max-w-2xl mt-6 mb-24 mx-5 sm:mx-auto justify-center">
+        <div id="alert-additional-content-1"
+             class="p-4 mb-4 text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800"
+             role="alert">
+            <div class="flex items-center gap-3">
+                <svg class="flex-shrink-0 w-4 h-4 me-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                     fill="currentColor">
+                    <path
+                        d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z"/>
+                    <path
+                        d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z"/>
+                </svg>
+                <span class="sr-only">Mail</span>
+                <h3 class="text-lg font-medium">Subscribe to our news</h3>
+            </div>
+            <div class="mt-5 text-sm">
+                <div class="flex flex-col sm:flex-row justify-between gap-3" id="subscription-container">
+                    <input type="email" id="email" placeholder="john@doe.com" required
+                           class="flex-grow sm:me-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto p-2.5 mb-3 sm:mb-0 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+                    <button type="button" id="subscribe-btn" data-csrf="{{ csrf_token() }}"
+                            class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-9 py-2.5 text-center">
+                        Subscribe
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <div
             class="p-4 mb-4 text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800 flex justify-between"
             role="alert">
@@ -32,17 +59,18 @@
              class="p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
              role="alert">
             <div class="flex items-center gap-3">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                     stroke="currentColor" class="size-5">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                          d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"/>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                    <path fill-rule="evenodd"
+                          d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
+                          clip-rule="evenodd"/>
                 </svg>
-                <span class="sr-only">Info</span>
+                <span class="sr-only">Danger</span>
                 <h3 class="text-md font-medium">Delete your account</h3>
             </div>
             <div class="mt-2 mb-4 text-sm">
                 Warning: Deleting your account is a permanent action and cannot be undone. All your data, including
-                pins, subscribers, and personal information, will be permanently removed from our system. This process is
+                pins,
+                subscribers, and personal information, will be permanently removed from our system. This process is
                 irreversible, and once completed, you will no longer be able to recover your account or any associated
                 data.
             </div>
@@ -70,26 +98,23 @@
                             <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                      stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                      stroke-width="2" d="M10 8v4m0 4h.01M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"/>
                             </svg>
-                            <h3 class="mb-5 text-md font-normal text-gray-500 dark:text-gray-400">Are you sure you
-                                want to delete your account? If you're sure you want to proceed, please confirm your
-                                decision carefully.</h3>
-                            <button data-modal-hide="popup-modal" type="submit" form="delete_account"
-                                    class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                                Are you sure you want to delete your account?</h3>
+                            <a href="{{ route('delete_account') }}"
+                               class="text-white bg-red-800 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center ms-2">
                                 Yes, I'm sure
-                            </button>
+                            </a>
                             <button data-modal-hide="popup-modal" type="button"
-                                    class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                    class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600 ms-2">
                                 No, cancel
                             </button>
-
-                            <form action="{{ route('delete_account') }}" method="POST" id="delete_account">@csrf</form>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
-
 @endsection

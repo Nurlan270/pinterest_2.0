@@ -9,6 +9,7 @@ use App\Http\Controllers\Dashboard\ChangePasswordController;
 use App\Http\Controllers\Dashboard\DeleteAccountController;
 use App\Http\Controllers\Dashboard\MyPinsController;
 use App\Http\Controllers\Dashboard\SavesController;
+use App\Http\Controllers\Dashboard\SubscribeToNewsController;
 use App\Http\Controllers\Dashboard\UploadAvatarController;
 use App\Http\Controllers\Dashboard\UploadPinController;
 use App\Http\Controllers\Main\DeletePinController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\Main\PinController;
 use App\Http\Controllers\Main\SavePinController;
 use App\Http\Controllers\Main\SubscribeController;
 use App\Http\Controllers\Main\UserProfileController;
+use App\Notifications\SubscribedToNews;
 use Illuminate\Support\Facades\Route;
 
 //      Main page
@@ -34,14 +36,12 @@ Route::get('reset-password', function () {
 })->middleware('guest')->name('password.reset');
 
 
-
 //      Auth actions
 Route::post('register', RegisterUserController::class)->middleware('guest')->name('register_user');
 Route::post('login', LoginUserController::class)->middleware('guest')->name('login_user');
 Route::post('forgot-password', SendResetLinkController::class)->middleware('guest')->name('password.email');
 Route::post('reset-password', ResetPasswordController::class)->middleware('guest')->name('password.update');
 Route::get('logout', LogoutUserController::class)->middleware('auth')->name('logout_user');
-
 
 
 //      Dashboard (Routes related to user)
@@ -73,9 +73,10 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('pins/{pin}', DeletePinController::class)->name('delete_pin');
 
+    Route::post('subscribe-to-news', SubscribeToNewsController::class);
 });
 
-Route::get('pins/{pin}/download',DownloadPinController::class)->name('download_pin');
+Route::get('pins/{pin}/download', DownloadPinController::class)->name('download_pin');
 Route::get('pins/{pin}', PinController::class)->name('pin');
 
 Route::get('users/{user}', UserProfileController::class)->name('user');

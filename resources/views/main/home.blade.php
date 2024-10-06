@@ -11,7 +11,7 @@
             @include('partials.pins', ['pins' => $pins, 'saves' => $saves])
         </div>
 
-        <div id="loading-spinner" class="hidden text-center py-5">
+        <div id="loading-spinner" class="text-center py-5" style="display: none">
             <div role="status">
                 <svg aria-hidden="true"
                      class="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-red-600"
@@ -37,7 +37,7 @@
                 if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 && !loading && nextPageUrl) {
                     // Prevent multiple AJAX requests at the same time
                     loading = true;
-                    document.getElementById('loading-spinner').classList.remove('hidden');
+                    document.getElementById('loading-spinner').style.display = 'block';
 
                     // Fetch the next page content via AJAX
                     fetch(nextPageUrl, {
@@ -52,7 +52,7 @@
                                 document.getElementById('pins-container').innerHTML += data.html;
                                 // Update the next page URL
                                 nextPageUrl = data.next_page;
-                                document.getElementById('loading-spinner').classList.add('hidden');
+                                document.getElementById('loading-spinner').style.display = 'none';
                                 loading = false;
 
                                 // Re-bind the save button logic for the newly added pins
@@ -61,7 +61,7 @@
                         })
                         .catch(error => {
                             console.error('Error loading pins:', error);
-                            document.getElementById('loading-spinner').classList.add('hidden');
+                            document.getElementById('loading-spinner').style.display = 'none';
                             loading = false;
                         });
                 }
