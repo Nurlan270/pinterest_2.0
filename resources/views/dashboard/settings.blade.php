@@ -6,6 +6,10 @@
 
     <x-top-nav/>
 
+    <x-notification-message/>
+
+    <x-error-message/>
+
     <div class="flex flex-col max-w-2xl mt-6 mb-24 mx-5 sm:mx-auto justify-center">
         <div id="alert-additional-content-1"
              class="p-4 mb-4 text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800"
@@ -23,13 +27,22 @@
             </div>
             <div class="mt-5 text-sm">
                 <div class="flex flex-col sm:flex-row justify-between gap-3" id="subscription-container">
-                    <input type="email" id="email" placeholder="john@doe.com" required
-                           class="flex-grow sm:me-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto p-2.5 mb-3 sm:mb-0 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}" id="csrf">
+                    @if(!empty(auth()->user()->subscription_email))
+                        <p>You're subscribed to our news notifications</p>
+                        <button type="button" id="unsubscribe-btn"
+                                class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+                            Unsubscribe
+                        </button>
+                    @else
+                        <input type="email" id="email" placeholder="john@doe.com" required
+                               class="flex-grow sm:me-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto p-2.5 mb-3 sm:mb-0 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
-                    <button type="button" id="subscribe-btn" data-csrf="{{ csrf_token() }}"
-                            class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-9 py-2.5 text-center">
-                        Subscribe
-                    </button>
+                        <button type="button" id="subscribe-btn"
+                                class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-9 py-2.5 text-center">
+                            Subscribe
+                        </button>
+                    @endif
                 </div>
             </div>
         </div>

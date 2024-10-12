@@ -3,21 +3,27 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Notifications\SubscribedToNews;
-use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
+use Symfony\Component\HttpFoundation\Response;
 
 class SubscribeToNewsController extends Controller
 {
-    public function __invoke()
+    public function __invoke(): \Illuminate\Http\JsonResponse
     {
         try {
-            Notification::route('mail', \request()->input('email'))
+            $email = \request()->input('email');
+
+            auth()->user()->update(['subscription_email' => $email]);
+
+            Notification::route('mail', $email)
                 ->notify(new SubscribedToNews());
-            return \response()->json(null, 200);
+
+            session()->flash('notification_msg', "You've subscribed to our news.");
         } catch (\Throwable $e) {
-            return \response()->json('Error occurred: '.$e, $e->getCode());
+            session()->flash('error_msg', 'An error occurred while subscribing, please try again later.');
         }
     }
 }

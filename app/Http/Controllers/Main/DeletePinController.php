@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Pin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 
 class DeletePinController extends Controller
 {
@@ -13,6 +14,7 @@ class DeletePinController extends Controller
     {
         Gate::authorize('delete', $pin);
 
+        Storage::delete('pins/'.$pin->image);
         $pin->delete();
 
         return redirect()->route('my_pins')

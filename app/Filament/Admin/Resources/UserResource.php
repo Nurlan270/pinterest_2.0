@@ -17,7 +17,7 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
     public static function form(Form $form): Form
     {
@@ -54,7 +54,7 @@ class UserResource extends Resource
                     ->formatStateUsing(fn ($record) => $record->subscribers->count())
                     ->default(0),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Joined')
+                    ->label('Registered')
                     ->dateTime('M d, Y - H:i:s')
                     ->sortable(),
             ])
@@ -63,6 +63,7 @@ class UserResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

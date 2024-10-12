@@ -24,6 +24,7 @@ class User extends Authenticatable implements CanResetPassword, FilamentUser
         'avatar',
         'name',
         'email',
+        'subscription_email',
         'password',
     ];
 

@@ -10,6 +10,7 @@ use App\Http\Controllers\Dashboard\DeleteAccountController;
 use App\Http\Controllers\Dashboard\MyPinsController;
 use App\Http\Controllers\Dashboard\SavesController;
 use App\Http\Controllers\Dashboard\SubscribeToNewsController;
+use App\Http\Controllers\Dashboard\UnsubscribeFromNewsController;
 use App\Http\Controllers\Dashboard\UploadAvatarController;
 use App\Http\Controllers\Dashboard\UploadPinController;
 use App\Http\Controllers\Main\DeletePinController;
@@ -20,6 +21,7 @@ use App\Http\Controllers\Main\SavePinController;
 use App\Http\Controllers\Main\SubscribeController;
 use App\Http\Controllers\Main\UserProfileController;
 use App\Notifications\SubscribedToNews;
+use App\Notifications\UnsubscribedFromNews;
 use Illuminate\Support\Facades\Route;
 
 //      Main page
@@ -74,6 +76,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('pins/{pin}', DeletePinController::class)->name('delete_pin');
 
     Route::post('subscribe-to-news', SubscribeToNewsController::class);
+    Route::post('unsubscribe-from-news', UnsubscribeFromNewsController::class);
 });
 
 Route::get('pins/{pin}/download', DownloadPinController::class)->name('download_pin');

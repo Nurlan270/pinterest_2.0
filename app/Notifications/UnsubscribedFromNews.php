@@ -35,9 +35,9 @@ class UnsubscribedFromNews extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->subject('You have unsubscribed from our news')
+            ->line("You'll no longer get news from us.")
+            ->line('You can subscribe to our news in any time you want in your account settings.');
     }
 
     /**
