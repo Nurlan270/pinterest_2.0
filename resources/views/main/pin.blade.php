@@ -4,6 +4,8 @@
 
 @section('content')
 
+    <x-error-message/>
+
     <div class="mx-auto shadow-2xl mt-5 mb-28 px-6 py-6 max-w-5xl rounded-3xl grid grid-cols-1 md:grid-cols-2 gap-10">
         <div class="rounded-3xl mx-auto my-auto">
             <img src="{{ Storage::url('pins/'.$pin->image) }}" alt="Pin image" class="rounded-3xl">

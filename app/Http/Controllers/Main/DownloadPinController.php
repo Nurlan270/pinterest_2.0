@@ -11,9 +11,8 @@ class DownloadPinController extends Controller
 {
     public function __invoke($pin)
     {
-        dd($pin, Storage::exists('pins/'.$pin));
         return Storage::exists('pins/'.$pin)
-            ? Storage::download('pins/'.$pin, \request()->input('name'))->send()
-            : back();
+            ? Storage::download('pins/'.$pin, \request()->input('name'))
+            : back()->with('error_msg', 'Error while downloading, please try again later.');
     }
 }
