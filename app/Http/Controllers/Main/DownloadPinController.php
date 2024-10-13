@@ -11,7 +11,7 @@ class DownloadPinController extends Controller
 {
     public function __invoke($pin)
     {
-        dd($pin, Storage::download('storage/pins/'.$pin)->isEmpty());
+        dd($pin, Storage::download('pins/'.$pin)->isEmpty());
         return Storage::exists('pins/'.$pin)
             ? Storage::download('pins/'.$pin, \request()->input('name'))->send()
             : back();
