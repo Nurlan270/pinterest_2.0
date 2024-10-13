@@ -16,10 +16,10 @@ class SubscribeToNewsController extends Controller
         try {
             $email = \request()->input('email');
 
-            auth()->user()->update(['subscription_email' => $email]);
-
             Notification::route('mail', $email)
                 ->notify(new SubscribedToNews());
+
+            auth()->user()->update(['subscription_email' => $email]);
 
             session()->flash('notification_msg', "You've subscribed to our news.");
         } catch (\Throwable $e) {
