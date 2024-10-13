@@ -14,7 +14,7 @@ const resetForm = (emailValue = '') => {
         </button>
     `;
     // Reattach the event listener after resetting the form
-    document.querySelector('#subscribe-btn').addEventListener('click', handleSubscription);
+    document?.querySelector('#subscribe-btn').addEventListener('click', handleSubscription);
 };
 
 // Email validation function
@@ -26,7 +26,7 @@ const isValidEmail = (email) => {
 
 // Main subscription handler function
 const handleSubscription = () => {
-    const email = document.querySelector('#email');
+    const email = document?.querySelector('#email');
 
     if (isValidEmail(email.value)) {
         // Show loading spinner and disable input/button
