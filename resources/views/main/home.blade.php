@@ -6,7 +6,7 @@
 
     <x-notification-message/>
 
-    <div class="container mx-auto px-5 py-2 mb-9 lg:px-14 lg:py-5">
+    <div class="container mx-auto px-5 py-2 mb-24 lg:px-14 lg:py-5">
         <div id="pins-container" class="columns-2 md:columns-3 lg:columns-4 xl:columns-6 gap-4">
             @include('partials.pins', ['pins' => $pins, 'saves' => $saves])
         </div>

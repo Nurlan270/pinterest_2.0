@@ -15,7 +15,7 @@ class UploadPinController extends Controller
         $data = $request->validated();
 
         $image = $request->file('image');
-        $imgName = time().'_'.$image->hashName();
+        $imgName = $image->hashName();
 
         Storage::disk('pins')->putFileAs('/', $image, $imgName);
 
