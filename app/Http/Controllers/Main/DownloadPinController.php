@@ -9,8 +9,10 @@ use Illuminate\Support\Facades\Storage;
 
 class DownloadPinController extends Controller
 {
-    public function __invoke($pin): \Symfony\Component\HttpFoundation\StreamedResponse
+    public function __invoke($pin)
     {
-        return Storage::download('pins/'.$pin, \request()->input('name'));
+        return Storage::exists('pins/'.$pin)
+            ? Storage::download('pins/'.$pin, \request()->input('name'))
+            : back();
     }
 }
