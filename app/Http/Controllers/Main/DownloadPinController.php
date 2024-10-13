@@ -12,7 +12,7 @@ class DownloadPinController extends Controller
     public function __invoke($pin)
     {
         return Storage::exists('pins/'.$pin)
-            ? Storage::download('storage/pins/'.$pin, \request()->input('name'))
+            ? Storage::download('pins/'.$pin, \request()->input('name'))
             : back();
     }
 }
