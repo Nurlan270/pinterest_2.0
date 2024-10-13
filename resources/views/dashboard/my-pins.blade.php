@@ -20,7 +20,7 @@
                             <img
                                 alt="Pin image"
                                 class="w-full h-auto rounded-lg object-cover group-hover:scale-105 transition-transform cursor-zoom-in"
-                                src="{{ Storage::url('pins/'.$pin->image) }}"/>
+                                src="{{ Storage::disk('pins')->url($pin->image) }}"/>
                         </a>
 
                         <a href="{{ route('download_pin', ['pin' => $pin->image, 'name' => $pin->title]) }}"
