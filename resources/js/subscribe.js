@@ -1,7 +1,7 @@
 const subscribeBtn = document?.querySelector('#subscribe-btn');
 const unsubscribeBtn = document?.querySelector('#unsubscribe-btn');
 const subscriptionContainer = document?.querySelector('#subscription-container');
-const csrf = document.querySelector('#csrf').value;
+const csrf = document?.querySelector('#csrf').value;
 
 // Function to reset the subscription form after an error
 const resetForm = (emailValue = '') => {
