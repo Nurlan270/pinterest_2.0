@@ -9,6 +9,8 @@
 
     <x-notification-message/>
 
+    <x-error-message/>
+
     <div class="container mx-auto px-5 py-2 lg:px-14 lg:pt-5">
         @if($pins->isNotEmpty())
             <div class="columns-2 md:columns-3 lg:columns-4 xl:columns-6 gap-4">
