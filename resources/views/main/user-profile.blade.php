@@ -5,8 +5,8 @@
 @section('content')
 
     {{--    Profile info    --}}
-    <div class="my-7">
-        <div class="relative w-20 h-20 mx-auto mb-7">
+    <div class="my-7 text-center">
+        <div class="relative w-20 h-20 mx-auto">
             @if(empty($user->avatar))
                 <img class="w-full h-full p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
                      src="{{ asset('assets/default-avatar.png') }}" alt="Default avatar">
@@ -16,14 +16,16 @@
             @endif
         </div>
 
+        <p class="my-4 font-semibold">{{ $user->name }}</p>
+
         <div class="text-gray-500 flex items-center justify-center">
             <p>
                 {{ $user->subscribers()->count() }}
                 Subscribers
             </p>
             @auth
-                <span class="font-bold px-4">·</span>
                 @can('subscribe', $user)
+                    <span class="font-bold px-4">·</span>
                     @if($is_subscribed)
                         <button type="button" id="unsubscribe-btn"
                                 data-author-id="{{ $user->id }}"
@@ -57,19 +59,21 @@
                     </a>
 
                     @auth
-                        @if($saves->contains('pin_id', $pin->id))
-                            <button type="button" disabled
-                                    class="hidden group-hover:block absolute top-1 right-1 bg-black text-white px-5 py-3 rounded-3xl font-extrabold cursor-pointer">
-                                Saved
-                            </button>
-                        @else
-                            <button type="button" id="save-btn-{{ $loop->iteration }}-{{ $pin->id }}"
-                                    data-pin-id="{{ $pin->id }}"
-                                    data-csrf="{{ csrf_token() }}"
-                                    class="hidden group-hover:block absolute top-1 right-1 bg-red-600 text-white px-5 py-3 rounded-3xl font-extrabold cursor-pointer hover:bg-red-700">
-                                Save
-                            </button>
-                        @endif
+                        @can('save', $pin)
+                            @if($saves->contains('pin_id', $pin->id))
+                                <button type="button" disabled
+                                        class="hidden group-hover:block absolute top-1 right-1 bg-black text-white px-5 py-3 rounded-3xl font-extrabold cursor-pointer">
+                                    Saved
+                                </button>
+                            @else
+                                <button type="button" id="save-btn-{{ $loop->iteration }}-{{ $pin->id }}"
+                                        data-pin-id="{{ $pin->id }}"
+                                        data-csrf="{{ csrf_token() }}"
+                                        class="hidden group-hover:block absolute top-1 right-1 bg-red-600 text-white px-5 py-3 rounded-3xl font-extrabold cursor-pointer hover:bg-red-700">
+                                    Save
+                                </button>
+                            @endif
+                        @endcan // hayden, prof.kameron
                     @endauth
                     <a href="{{ route('download_pin', ['pin' => $pin->image, 'name' => $pin->title]) }}"
                        title="Download pin"
