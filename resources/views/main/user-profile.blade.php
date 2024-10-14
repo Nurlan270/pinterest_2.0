@@ -73,7 +73,7 @@
                                     Save
                                 </button>
                             @endif
-                        @endcan // hayden, prof.kameron
+                        @endcan
                     @endauth
                     <a href="{{ route('download_pin', ['pin' => $pin->image, 'name' => $pin->title]) }}"
                        title="Download pin"
