@@ -10,14 +10,14 @@ class SendResetLinkController extends Controller
 {
     public function __invoke(Request $request): \Illuminate\Http\RedirectResponse
     {
-        $request->validate(['email' => 'required|email|exists:users']);
+        $request->validate(['email' => 'required|email']);
 
         $status = Password::sendResetLink(
             $request->only('email')
         );
 
         return $status === Password::RESET_LINK_SENT
-            ? back()->with(['notification_msg' => 'Reset link was sent to provided email'])
-            : back()->withErrors(['email' => $status]);
+            ? back()->with('notification_msg', 'Reset link was sent to provided email')
+            : back()->withErrors(['email' => __($status)]);
     }
 }
