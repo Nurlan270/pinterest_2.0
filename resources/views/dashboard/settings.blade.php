@@ -11,7 +11,7 @@
     <x-error-message/>
 
     <div class="flex flex-col max-w-2xl mt-6 mb-24 mx-5 sm:mx-auto justify-center">
-        <div id="alert-additional-content-1"
+        <div
              class="p-4 mb-4 text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800"
              role="alert">
             <div class="flex items-center gap-3">
@@ -62,7 +62,7 @@
             <div class="flex">
                 <a type="button" href="{{ route('logout_user') }}"
                    class="text-blue-800 bg-transparent border border-blue-800 hover:bg-blue-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-blue-600 dark:border-blue-600 dark:text-blue-400 dark:hover:text-white dark:focus:ring-blue-800"
-                   data-dismiss-target="#alert-additional-content-1" aria-label="Close">
+                   aria-label="Close">
                     Log out
                 </a>
             </div>
@@ -115,10 +115,11 @@
                             </svg>
                             <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
                                 Are you sure you want to delete your account?</h3>
-                            <a href="{{ route('delete_account') }}"
+                            <form action="{{ route('delete_account') }}" method="POST" id="deleteAccount">@csrf</form>
+                            <button form="deleteAccount"
                                class="text-white bg-red-800 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center ms-2">
                                 Yes, I'm sure
-                            </a>
+                            </button>
                             <button data-modal-hide="popup-modal" type="button"
                                     class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600 ms-2">
                                 No, cancel

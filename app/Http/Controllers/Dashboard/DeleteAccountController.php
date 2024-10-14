@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class DeleteAccountController extends Controller
 {
-    public function __invoke()
+    public function __invoke(): \Illuminate\Http\RedirectResponse
     {
         User::query()->where('id', auth()->id())->delete();
 
