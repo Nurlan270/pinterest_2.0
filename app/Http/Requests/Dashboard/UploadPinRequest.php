@@ -17,7 +17,7 @@ class UploadPinRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'min:3', 'max:75'],
             'description' => ['nullable', 'string', 'max:1000'],
-            'image' => ['required', 'file', ImageFile::types(['png', 'jpg', 'jpeg'])->max('27mb')],
+            'image' => ['required', 'file', ImageFile::types(['png', 'jpg', 'jpeg'])->max('28mb')],
         ];
     }
 
